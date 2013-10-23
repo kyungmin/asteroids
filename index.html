@@ -8,7 +8,23 @@
 	</div>
 
 	<!-- then load our own app.js code -->
+	<script type="application/javascript" src="./inherits.js"></script>
 	<script type="application/javascript" src="./moving_object.js"></script>
 	<script type="application/javascript" src="./asteroid.js"></script>
+	<script type="application/javascript" src="./game.js"></script>
+
+	<script>
+		var canvas = document.createElement("canvas");
+		canvas.setAttribute("id", "canvas");
+		canvas.setAttribute("width", "600");
+		canvas.setAttribute("height", "600");
+
+		var content = document.getElementById("content");
+		content.appendChild(canvas);
+
+		var ctx = canvas.getContext("2d");
+
+		new Asteroids.Game(ctx).start();
+	</script>
 </body>
 </html>

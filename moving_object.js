@@ -10,8 +10,18 @@
 	}
 
 	MovingObject.prototype.move = function() {
-		this.posX += this.vel[0];
-		this.posY += this.vel[1];
+		this.posX = bound((this.posX + this.vel[0]), Asteroids.Game.DIM_X);
+		this.posY = bound((this.posY + this.vel[1]), Asteroids.Game.DIM_Y);
+	}
+
+	var bound = Asteroids.bound = function (number, max) {
+		if (number < 0) {
+			return (number + max);
+		} else if (number > max) {
+			return (number - max);
+		} else {
+			return number;
+		}
 	}
 
 	MovingObject.prototype.draw = function(ctx) {
