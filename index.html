@@ -1,32 +1,63 @@
 <html>
 <head>
-	<title>Asteroids!</title>
+  <title>Asteroids!</title>
 </head>
 
 <body>
-	<div id="content">
-	</div>
+  <div id="content">
+  </div>
+  
+  <div id="legend">
+  <b>(arrow keys)</b> : move<br>
+  <b>(space)</b> : fire<br>
+  </div>
+  <div id="footer">
+  Made by <a href="http://app-academy-kyungmin.tumblr.com">KK</a> :)
+  </div>
 
-	<!-- then load our own app.js code -->
-	<script type="application/javascript" src="./inherits.js"></script>
-	<script type="application/javascript" src="./moving_object.js"></script>
-	<script type="application/javascript" src="./asteroid.js"></script>
-	<script type="application/javascript" src="./game.js"></script>
-	<script type="application/javascript" src="./ship.js"></script>
-	<script type="application/javascript" src="./keymaster.js"></script>
+  <style type"text/css">
+  #legend {
+    width: 140px;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: "Arial";
+    font-size: 14px;
+    color: #333;
+    background: #eee
+  }
+  #footer {
+    margin-top:10px;
+    font-family: "Arial";
+    font-size: 14px;
+    color: #777;
+  }
+  </style>
 
-	<script>
-		var canvas = document.createElement("canvas");
-		canvas.setAttribute("id", "canvas");
-		canvas.setAttribute("width", "600");
-		canvas.setAttribute("height", "600");
+  <script type="application/javascript" src="./util.js"></script>
+  <script type="application/javascript" src="./moving_object.js"></script>
+  <script type="application/javascript" src="./asteroid.js"></script>
+  <script type="application/javascript" src="./game.js"></script>
+  <script type="application/javascript" src="./ship.js"></script>
+  <script type="application/javascript" src="./bullet.js"></script>
+  <script type="application/javascript" src="./keymaster.js"></script>
 
-		var content = document.getElementById("content");
-		content.appendChild(canvas);
+  <script>
+    var canvas = document.createElement("canvas");
+    canvas.setAttribute("id", "canvas");
+    canvas.setAttribute("width", "600");
+    canvas.setAttribute("height", "600");
 
-		var ctx = canvas.getContext("2d");
+    var content = document.getElementById("content");
+    content.appendChild(canvas);
 
-		new Asteroids.Game(ctx).start();
-	</script>
+    var ctx = canvas.getContext("2d");
+    var bg = document.createElement('img');
+    bg.onload = function () {
+      ctx.drawImage(bg, 0, 0);
+    }
+    bg.src = 'bg.jpg';
+
+    new Asteroids.Game(ctx, bg).start();
+  </script>
 </body>
 </html>

@@ -1,27 +1,30 @@
-(function(root) {
-	var Asteroids = root.Asteroids = (root.Asteroids || {});
+(function (root) {
+  var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-	var Asteroid = Asteroids.Asteroid = function (posX, posY, vel) {
-		Asteroids.MovingObject.call(this, posX, posY, vel, RADIUS, COLOR);
-	}
+  var Asteroid = Asteroids.Asteroid = function (posX, posY, vel) {
+    Asteroids.MovingObject.call(this, posX, posY, vel, Asteroid.RADIUS, Asteroid.COLOR);
+  };
 
-	var COLOR = Asteroid.COLOR = 'black';
-	var RADIUS = Asteroid.RADIUS = 20;
+  Asteroid.inherits(Asteroids.MovingObject);
+  Asteroid.COLOR = '#424370';
+  Asteroid.RADIUS = 20;
+  Asteroid.SPEED = 4;
 
-	Asteroid.inherits(Asteroids.MovingObject);
+  var randomAsteroid = Asteroid.randomAsteroid = function (dimX, dimY) {
+    var startX = dimX * Math.random();
+    var startY = dimY * Math.random();
+    var startVel = randomVec(Asteroid.SPEED);
+    var ast = new Asteroid (startX, startY, startVel);
+    return ast;
+  };
 
-	var randomAsteroid = Asteroid.randomAsteroid = function (dimX, dimY) {
-		var startX = dimX * Math.random();
-		var startY = dimY * Math.random();
-		var startVel = randomVec();
-		var ast = new Asteroid (startX, startY, startVel);
-		return ast;
+  var randomVec = Asteroids.randomVec = function (speed) {
+    var x = Math.random() - 0.5;
+    var y = Math.random() - 0.5;
+
+    var preNorm = Asteroids.Util.norm([x, y]);
+    var mult = speed / preNorm;
+
+    return [mult * x, mult * y];
 	};
-
-	var randomVec = Asteroids.randomVec = function () {
-		var randomX = 3 * ((Math.random() * 2) - 1);
-		var randomY = 3 * ((Math.random() * 2) - 1);
-		return [randomX, randomY];
-	}
-
 })(this);
