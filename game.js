@@ -106,6 +106,7 @@
     this.ctx.fillStyle ="#7B7DB5";
     this.ctx.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
     this.ctx.font = "30px Courier New"
+    this.ctx.textAlign = "center"; 
     this.ctx.fillStyle = "#fff";
     this.ctx.moveTo(0, 0);
     if (this.state == 'win'){
@@ -113,7 +114,7 @@
     } else {
       this.ctx.fillText("Game Over", 300, 300);
     }
-    
+    this.showRestart();
     window.clearInterval(this.loopID);
   };
 
@@ -121,5 +122,14 @@
     this.bindKeyHandlers();
     this.addAsteroids(Game.NUM_ASTEROIDS);
     this.loopID = window.setInterval(this.step.bind(this), Game.FPS);
+  };
+
+  var showRestart = Game.prototype.showRestart = function () {
+    var canvas = document.getElementById('content');
+    var restart = document.createElement('a');
+    restart.setAttribute("id", "restart");
+    restart.setAttribute("onClick", "restart()");
+    restart.innerHTML = 'Restart';
+    canvas.appendChild(restart);
   };
 })(this);

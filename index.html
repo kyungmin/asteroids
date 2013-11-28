@@ -1,35 +1,68 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Asteroids!</title>
 </head>
 
 <body>
-  <div id="content">
-  </div>
-  
-  <div id="legend">
-  <b>(arrow keys)</b> : move<br>
-  <b>(space)</b> : fire<br>
-  </div>
-  <div id="footer">
-  Made by <a href="http://app-academy-kyungmin.tumblr.com">KK</a> :)
+  <div class="cf">
+    <div id="content">
+    </div>
+
+    <div id="legend">
+      <b>Arrow keys</b>: move<br>
+      <b>Space</b>: fire<br>
+      <br>
+      <span id="footer">Made by <a href="http://app-academy-kyungmin.tumblr.com">Kyungmin Kim</a></span>
+    </div>
   </div>
 
   <style type"text/css">
-  #legend {
-    width: 140px;
-    margin-top: 10px;
-    padding: 10px;
+  body {
     font-family: "Arial";
-    font-size: 14px;
+  }
+  #content {
+    width: 600px;
+    height: 600px;
+    float: left;
+  }
+
+  #legend {
+    float: left;
+    width: 400px;
+    margin-left: 10px;
+    padding: 10px;
+    font-weight: 200;
+    font-size: 16px;
     color: #333;
-    background: #eee
+    background: #f7f7f7
+  }
+  #legend b{
+    font-weight: 400;
   }
   #footer {
-    margin-top:10px;
-    font-family: "Arial";
-    font-size: 14px;
-    color: #777;
+    font-size: 12px;
+    color: #444;
+  }
+
+  .cf:before, cf:after {
+    content: " ";
+    display: table;
+  }
+
+  .cf:after {
+    clear: both;
+  }
+
+  #restart {
+    position: absolute;
+    top: 350px;
+    left: 285px;
+    color: #fff;
+    text-decoration: underline;
+  }
+  #restart:hover {
+    cursor: pointer;
   }
   </style>
 
@@ -43,6 +76,9 @@
 
   <script>
     var canvas = document.createElement("canvas");
+    var canvasLeft = canvas.offsetLeft;
+    var canvasTop = canvas.offsetTop;
+
     canvas.setAttribute("id", "canvas");
     canvas.setAttribute("width", "600");
     canvas.setAttribute("height", "600");
@@ -58,6 +94,13 @@
     bg.src = 'bg.jpg';
 
     new Asteroids.Game(ctx, bg).start();
+
+    function restart() {
+      var content = document.getElementById('content');
+      var restartLink = document.getElementById('restart');
+      content.removeChild(restartLink);
+      new Asteroids.Game(ctx, bg).start();
+    }
   </script>
 </body>
 </html>
